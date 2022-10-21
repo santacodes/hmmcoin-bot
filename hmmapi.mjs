@@ -30,8 +30,7 @@ const getMaticToUSD = () =>
     .then((response) => response.json())
     .then((data) => data?.USD);
 
-
-export async function getprices() {
+export default function getprices() {
   Promise.all([
     getHmmCoinToMatic(),
     getMaticToUSD()

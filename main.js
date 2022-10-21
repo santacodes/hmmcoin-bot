@@ -1,12 +1,14 @@
-import { getprices } from "./hmmapi.mjs";
+import getprices from "./hmmapi.mjs";
 
 const { Client, GatewayIntentBits, Message } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 
+
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const botid = client.user.id;
+  const price = require('./hmmapi.mjs');
   //client.user.setPresence({ activities: [{ name: 'Getting the Price of HMM' }], status: 'idle' });
 });
 
