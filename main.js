@@ -1,6 +1,6 @@
 import getprices from "./hmmapi.mjs";
+import { Client, GatewayIntentBits, Message } from 'discord.js';
 
-const { Client, GatewayIntentBits, Message } = require("discord.js");
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 
@@ -8,7 +8,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const botid = client.user.id;
-  const price = require('./hmmapi.mjs');
+  let price = String(getprices());
   //client.user.setPresence({ activities: [{ name: 'Getting the Price of HMM' }], status: 'idle' });
 });
 
@@ -27,6 +27,5 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
-client.login(
-  "ODI2MDc4MjcyMTQzMDk3OTA2.Gn84w2.ww4FTfDzXDFJjbHDA3Kj-avalvKVFAcGZJItxo"
-);
+//console.log(process.env.DISCORD_TOKEN)
+client.login("ODI2MDc4MjcyMTQzMDk3OTA2.Gn84w2.ww4FTfDzXDFJjbHDA3Kj-avalvKVFAcGZJItxo");
