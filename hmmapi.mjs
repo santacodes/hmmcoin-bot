@@ -1,6 +1,4 @@
 import fetch from "node-fetch";
-import express from "express";
-import cors from "cors";
 
 const HMCAddress = "0xdab9d64a07d5cad715692b1a7fb6e32d1a069c23";
 
@@ -32,24 +30,17 @@ const getMaticToUSD = () =>
     .then((response) => response.json())
     .then((data) => data?.USD);
 
-/*
-express()
-  .use(cors())
-  .get('/', (req, res) => {  //changed '/price' to '/'
-    Promise.all([
-      getHmmCoinToMatic(),
-      getMaticToUSD()
-    ])
-      .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-      .then(price => {res.send(JSON.stringify(price))})
-  })
-  .listen(5000) //changed port to 400 as it was bugging (You really want to use port 80/443 for best interoperability for REST APIs)
-*/
 
-function getprices() {
-  return [getHmmCoinToMatic(), getMaticToUSD()];
+export async function getprices() {
+  Promise.all([
+    getHmmCoinToMatic(),
+    getMaticToUSD()
+  ])
+    .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
+    .then(price => console.log("I got it to work from fucntion " + price)) //return price to a method called in main.js
 }
 
+await getprices();
 
 Promise.all([
   getHmmCoinToMatic(),
