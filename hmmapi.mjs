@@ -36,7 +36,7 @@ export default function getprices() {
     getMaticToUSD()
   ])
     .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-    .then(price => console.log("I got it to work from fucntion " + price)) //return price to a method called in main.js
+    .then(price => function finalprice(price) {return price}) //return price to a method called in main.js
 }
 
 await getprices();
@@ -46,6 +46,6 @@ Promise.all([
   getMaticToUSD()
 ])
   .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-  .then(price => console.log("I got it to work" + price)) //return price to a method called in main.js
+  .then(price => function finalprice(price) {return price}) //return price to a method called in main.js
   
 
