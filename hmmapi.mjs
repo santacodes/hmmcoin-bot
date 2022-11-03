@@ -44,7 +44,7 @@ async function getprices() {
   ])
     .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
     .then( (price) => {writeFile("./data.json", JSON.stringify([{"price":price}], null, 2), (err) => {
-      if (err) { console.error(err); return; };
+      if (err) { console.error(err); };
       console.log("Created a JSOn file");
   });}) //return price to a method called in main.js
 }

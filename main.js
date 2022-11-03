@@ -1,5 +1,5 @@
 import getprices from "./hmmapi.mjs";
-import readFile from "fs";
+import { readFile } from "fs";
 import { Client, GatewayIntentBits, Message } from "discord.js";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -28,16 +28,18 @@ const priceUpdate = async () => {
   const bot = await server.members.fetch(client.user.id)
   await getprices();
 
-  readFile('./data.json', 'utf-8', function (err, price) {
+  readFile('./data.json', 'utf8', function (err, price) {
     if (err) {
       console.log(err);
     } else {
+        console.log("got data from json")
        console.log(JSON.parse(price));
-  
+      let pr = price["price"];
+      console.log(pr);
     }
   });
-  console.log("current price is " + price)
-  bot.setNickname("$ " + price);
+  console.log("current price is " + pr)
+  bot.setNickname("$ " + pr);
   console.log("updated price! ");
   //client.user.setActivity(`Bid: ${token.Bid}  Ask: ${token.Ask}`);
 }
