@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import {readFile, writeFile} from "fs";
 
 const HMCAddress = "0xdab9d64a07d5cad715692b1a7fb6e32d1a069c23";
 
@@ -30,13 +31,22 @@ const getMaticToUSD = () =>
     .then((response) => response.json())
     .then((data) => data?.USD);
 
-export default function getprices() {
+export default async function returnvalue() {
+  const price = await getprices();
+  console.log("prices fetched from getprice" + price)
+  return price;
+}
+
+async function getprices() {
   Promise.all([
     getHmmCoinToMatic(),
     getMaticToUSD()
   ])
     .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-    .then(price => function finalprice(price) {return price}) //return price to a method called in main.js
+    .then( (price) => {writeFile("./data.json", JSON.stringify([{"price":price}], null, 2), (err) => {
+      if (err) { console.error(err); return; };
+      console.log("Created a JSOn file");
+  });}) //return price to a method called in main.js
 }
 
 await getprices();
@@ -46,6 +56,6 @@ Promise.all([
   getMaticToUSD()
 ])
   .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-  .then(price => function finalprice(price) {return price}) //return price to a method called in main.js
+  .then((price) => {JSON.stringify([{"price":String(price)}])}) //return price to a method called in main.js
   
 
