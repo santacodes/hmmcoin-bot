@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import {readFile, writeFile} from "fs";
 
 const HMCAddress = "0xdab9d64a07d5cad715692b1a7fb6e32d1a069c23";
+const botmsg = "[HMC] "
 
 const getHmmCoinToMatic = () =>
   fetch("https://api.fura.org/subgraphs/name/quickswap", {
@@ -20,7 +21,7 @@ const getHmmCoinToMatic = () =>
   })
     .then((response) => response.json())
     .then((result) => result?.data?.pairs?.[0]?.token0Price)
-    .catch((error) => console.log("error", error));
+    .catch((error) => console.log(botmsg + "error", error));
 
 const getMaticToUSD = () =>
   fetch("https://min-api.cryptocompare.com/data/price?fsym=MATIC&tsyms=USD", {
@@ -33,7 +34,7 @@ const getMaticToUSD = () =>
 
 export default async function returnvalue() {
   const price = await getprices();
-  console.log("prices fetched from getprice" + price)
+  console.log(botmsg + "Prices fetched from getprice" + price)
   return price;
 }
 
@@ -44,18 +45,11 @@ async function getprices() {
   ])
     .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
     .then( (price) => {writeFile("./data.json", JSON.stringify({"price":price}, null, 2), (err) => {
-      if (err) { console.error(err); };
-      console.log("Updated the price in JSON file");
+      if (err) { console.error(botmsg + err); };
+      console.log(botmsg + "Updated the price in JSON file");
   });}) 
 }
 
-await getprices();
-/*
-Promise.all([
-  getHmmCoinToMatic(),
-  getMaticToUSD()
-])
-  .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-  .then((price) => {JSON.stringify([{"price":String(price)}])}) 
-  */
+await getprices(); //only works when this file is ran (for test cases)
+
 
