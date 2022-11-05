@@ -36,7 +36,6 @@ const priceUpdate = async () => {
   else{
     bot.setNickname("HMC " +  '(' + up_arrow + ') ' + "$" + price);
   }
-  //bot.setNickname("HMC $" + price);
   previous_price = price;
   //client.user.setActivity(`Bid: ${token.Bid}  Ask: ${token.Ask}`);
 }
