@@ -1,10 +1,12 @@
 import getprices from "./hmmapi.mjs";
 import { readFileSync } from "fs";
 import { Client, GatewayIntentBits, Message } from "discord.js";
-import fetch from "node-fetch";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const botmsg = "[HMC] ";
+let previous_price = null;
+const up_arrow = "↗️";
+const down_arrow = "↘️";
 
 client.on("ready", () => {
   console.log(botmsg + `Logged in as ${client.user.tag}!`);
@@ -13,7 +15,7 @@ client.on("ready", () => {
   let member = client.user.id;
   setInterval(function(){
     priceUpdate()
-  }, 60000) //1 - minute event loop 
+  }, 5000) //1 - minute event loop 60000
 });
 
 const priceUpdate = async () => {
@@ -28,8 +30,14 @@ const priceUpdate = async () => {
   
   console.log(botmsg + "Current Price : " + jsonParsed["price"]);
   let price = jsonParsed["price"];
-
-  bot.setNickname("HMC $" + price);
+  if(price < previous_price){
+    bot.setNickname("HMC " +  '(' + down_arrow + ') ' + "$" + price);
+  }
+  else{
+    bot.setNickname("HMC " +  '(' + up_arrow + ') ' + "$" + price);
+  }
+  //bot.setNickname("HMC $" + price);
+  previous_price = price;
   //client.user.setActivity(`Bid: ${token.Bid}  Ask: ${token.Ask}`);
 }
 
