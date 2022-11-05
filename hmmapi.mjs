@@ -43,19 +43,19 @@ async function getprices() {
     getMaticToUSD()
   ])
     .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-    .then( (price) => {writeFile("./data.json", JSON.stringify([{"price":price}], null, 2), (err) => {
+    .then( (price) => {writeFile("./data.json", JSON.stringify({"price":price}, null, 2), (err) => {
       if (err) { console.error(err); };
-      console.log("Created a JSOn file");
-  });}) //return price to a method called in main.js
+      console.log("Updated the price in JSON file");
+  });}) 
 }
 
 await getprices();
-
+/*
 Promise.all([
   getHmmCoinToMatic(),
   getMaticToUSD()
 ])
   .then(([hmmCoinToMatic, maticToUSD]) => hmmCoinToMatic * maticToUSD)
-  .then((price) => {JSON.stringify([{"price":String(price)}])}) //return price to a method called in main.js
-  
+  .then((price) => {JSON.stringify([{"price":String(price)}])}) 
+  */
 
