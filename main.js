@@ -41,6 +41,5 @@ const priceUpdate = async () => {
 }
 
 //console.log(botmsg + process.env.DISCORD_TOKEN)
-client.login(
-  "NzA3MDc4NDQ5NzM0NjE1MDcx.GZuYj8.W4ltYT-6tG8bcW2nnThXnYuyrT9AGiw2SOJFBs")
+client.login("YOUR_BOT_TOKEN")
   
