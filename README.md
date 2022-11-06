@@ -13,7 +13,7 @@
 ```sh
 git clone https://github.com/santacodes/hmmcoin-bot.git
 cd hmmcoin-bot
-npm install
+npm install -g
 ```
 ## ⚙️ Configuration
 
