@@ -21,7 +21,7 @@ client.on("ready", () => {
 const priceUpdate = async () => {
   console.log(botmsg + "updating price");
 
-  const server = await client.guilds.fetch("819572193796292678")
+  const server = await client.guilds.fetch("817821642554212362")
   const bot = await server.members.fetch(client.user.id)
   await getprices();
 
@@ -41,5 +41,5 @@ const priceUpdate = async () => {
 }
 
 //console.log(botmsg + process.env.DISCORD_TOKEN)
-client.login("YOUR_BOT_TOKEN")
+client.login("MTAzOTYyMTk3NTY0NTExMDMyNA.GB9K0p.QNCzL2jj-PKGvYyYNT2Kik09hwvQqKVuWmLV0E")
   
