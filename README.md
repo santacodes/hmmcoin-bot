@@ -24,3 +24,17 @@ Replace *YOUR_TAKEN_HERE* with the Bot token
 ```js
 client.login("YOUR_BOT_TOKEN")
 ```
+
+Replace the Guild ID to your Server ID with the Bot
+
+```js 
+const server = await client.guilds.fetch("817821642554212362")
+```
+
+**Tweaking other settings -** 
+
+Change the second parameter (_in this case 4_) to the number of digits you want to round off
+
+```js
+price = roundTo(price, 4);
+```
