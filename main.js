@@ -15,8 +15,27 @@ client.on("ready", () => {
   let member = client.user.id;
   setInterval(function(){
     priceUpdate()
-  }, 5000) //1 - minute event loop 60000
+  }, 60000) //1 - minute event loop 60000 (for testing use 5000)
 });
+
+//Funtion for rounding off digits
+function roundTo(n, digits) {
+  var negative = false;
+  if (digits === undefined) {
+      digits = 0;
+  }
+  if (n < 0) {
+      negative = true;
+      n = n * -1;
+  }
+  var multiplicator = Math.pow(10, digits);
+  n = parseFloat((n * multiplicator).toFixed(11));
+  n = (Math.round(n) / multiplicator).toFixed(digits);
+  if (negative) {
+      n = (n * -1).toFixed(digits);
+  }
+  return n;
+}
 
 const priceUpdate = async () => {
   console.log(botmsg + "updating price");
@@ -30,6 +49,8 @@ const priceUpdate = async () => {
   
   console.log(botmsg + "Current Price : " + jsonParsed["price"]);
   let price = jsonParsed["price"];
+  price = roundTo(price, 4);
+
   if(price < previous_price){
     bot.setNickname("HMC " +  '(' + down_arrow + ') ' + "$" + price);
   }

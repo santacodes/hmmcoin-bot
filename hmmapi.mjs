@@ -34,7 +34,6 @@ const getMaticToUSD = () =>
 
 export default async function returnvalue() {
   const price = await getprices();
-  console.log(botmsg + "Prices fetched from getprice" + price)
   return price;
 }
 
