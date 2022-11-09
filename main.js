@@ -52,10 +52,10 @@ const priceUpdate = async () => {
   price = roundTo(price, 4);
 
   if(price < previous_price){
-    bot.setNickname("HMC " +  '(' + down_arrow + ') ' + "$" + price);
+    bot.setNickname("HMC " + "$" + price + ' (' + down_arrow + ')');
   }
   else{
-    bot.setNickname("HMC " +  '(' + up_arrow + ') ' + "$" + price);
+    bot.setNickname("HMC " + "$" + price + ' (' + up_arrow + ')');
   }
   previous_price = price;
   //client.user.setActivity(`Bid: ${token.Bid}  Ask: ${token.Ask}`);
