@@ -3,3 +3,6 @@ node_modules
 
 #Ignore .env files
 .env
+
+#Ignoring temp code runner js file
+tempCodeRunnerFile.js

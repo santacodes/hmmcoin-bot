@@ -1,6 +1,7 @@
 import getprices from "./hmmapi.mjs";
 import { readFileSync } from "fs";
-import { Client, GatewayIntentBits, Message } from "discord.js";
+import { Client, ContextMenuCommandAssertions, GatewayIntentBits, Message } from "discord.js";
+import contents from "./watchapi.mjs";
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const botmsg = "[HMC] ";
@@ -42,7 +43,8 @@ const priceUpdate = async () => {
 
   const server = await client.guilds.fetch("817821642554212362")
   const bot = await server.members.fetch(client.user.id)
-  await getprices();
+  await getprices(); //calls the getprices function from the hmmapi (updates the price)
+  await contents(); //calls the contents function from the watchapi (updates the 24h)
 
   let fileText = readFileSync('./data.json');
   let jsonParsed = JSON.parse(fileText);
@@ -50,7 +52,7 @@ const priceUpdate = async () => {
   console.log(botmsg + "Current Price : " + jsonParsed["price"]);
   let price = jsonParsed["price"];
   price = roundTo(price, 4);
-
+  let twentyfour = jsonParsed["24h"]
   if(price < previous_price){
     bot.setNickname("HMC " + "$" + price + ' (' + down_arrow + ')');
   }
@@ -58,7 +60,7 @@ const priceUpdate = async () => {
     bot.setNickname("HMC " + "$" + price + ' (' + up_arrow + ')');
   }
   previous_price = price;
-  //client.user.setActivity(`Bid: ${token.Bid}  Ask: ${token.Ask}`);
+  client.user.setActivity(`24h: ${twentyfour}`);
 }
 
 //console.log(botmsg + process.env.DISCORD_TOKEN)
