@@ -64,5 +64,5 @@ const priceUpdate = async () => {
 }
 
 //console.log(botmsg + process.env.DISCORD_TOKEN)
-client.login("MTAzOTYyMTk3NTY0NTExMDMyNA.GB9K0p.QNCzL2jj-PKGvYyYNT2Kik09hwvQqKVuWmLV0E")
+client.login("PUT YOUR TOKEN HERE")
   
